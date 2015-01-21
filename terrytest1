@@ -11,7 +11,7 @@ from neopixel import *
 # LED strip configuration:
 LED_COUNT      = 50      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
+LED_FREQ_HZ    = 900000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
@@ -85,9 +85,11 @@ if __name__ == '__main__':
 	print 'Press Ctrl-C to quit.'
 	while True:
 		# # Color wipe animations.
-		colorWipe(strip, Color(255, 0, 0))  # Red wipe
-		colorWipe(strip, Color(0, 255, 0))  # Blue wipe
-		colorWipe(strip, Color(0, 0, 255))  # Green wipe
+		# colorWipe(strip, Color(255, 255, 0))  # White wipe
+		# colorWipe(strip, Color(0, 0, 0))  # Black wipe
+
+		# colorWipe(strip, Color(0, 255, 0))  # Blue wipe
+		# colorWipe(strip, Color(0, 0, 255))  # Green wipe
 		# # Theater chase animations.
 		# theaterChase(strip, Color(127, 127, 127))  # White theater chase
 		# theaterChase(strip, Color(127,   0,   0))  # Red theater chase
@@ -96,4 +98,15 @@ if __name__ == '__main__':
 		# rainbow(strip)
 		# rainbowCycle(strip)
 		# theaterChaseRainbow(strip)
+                wait_ms=50
+
+                for j in range(1):
+                      strip.setPixelColor(1, Color(255, 0, 255))
+                      strip.show()
+                      time.sleep(1)
+
+                      strip.setPixelColor(2, Color(255, 0, 255))
+                      strip.setPixelColor(1, Color(255, 0, 0))
+                      strip.show()
+                      time.sleep(wait_ms/10)
 
