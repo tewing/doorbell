@@ -9,12 +9,12 @@ from neopixel import *
 
 
 # LED strip configuration:
-LED_COUNT      = 50      # Number of LED pixels.
+LED_COUNT      = 2      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
-LED_FREQ_HZ    = 900000  # LED signal frequency in hertz (usually 800khz)
+LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
+LED_INVERT     = True   # True to invert the signal (when using NPN transistor level shift)
 
 
 # Define functions which animate LEDs in various ways.
@@ -101,12 +101,17 @@ if __name__ == '__main__':
                 wait_ms=50
 
                 for j in range(1):
-                      strip.setPixelColor(1, Color(255, 0, 255))
-                      strip.show()
-                      time.sleep(1)
 
-                      strip.setPixelColor(2, Color(255, 0, 255))
-                      strip.setPixelColor(1, Color(255, 0, 0))
-                      strip.show()
-                      time.sleep(wait_ms/10)
+                      while True:
+                            strip.setPixelColor(1, Color(255, 0, 255))
+                            strip.show()
+                            print '1'
+                            time.sleep(3)
+
+                            strip.setPixelColor(1, Color(0, 0, 0))
+                            strip.show()
+                            print '2'
+                            time.sleep(3)
+
+
 
