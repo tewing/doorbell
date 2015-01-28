@@ -6,10 +6,11 @@
 import time
 
 from neopixel import *
+from csv import *
 
 
 # LED strip configuration:
-LED_COUNT      = 50      # Number of LED pixels.
+LED_COUNT      = 2      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
@@ -29,7 +30,7 @@ def theaterChase(strip, color, wait_ms=50, iterations=10):
 	"""Movie theater light style chaser animation."""
 	for j in range(iterations):
 		for q in range(3):
-			for i in range(0, strip.numPixels(), 3):
+			for i in range(0, strip.numPixels()):
 				strip.setPixelColor(i+q, color)
 			strip.show()
 			time.sleep(wait_ms/1000.0)
@@ -74,6 +75,19 @@ def theaterChaseRainbow(strip, wait_ms=50):
 			for i in range(0, strip.numPixels(), 3):
 				strip.setPixelColor(i+q, 0)
 
+def csvdisp(strip, wait_ms=20, iterations=1):
+        """Read a CSV, display rows one at a time."""
+        import csv
+        with open('disp.csv', 'rU') as csvfile:
+                sequence = csv.reader(csvfile, delimiter=',', quotechar='|')
+                for row in sequence:
+	            for i in range(strip.numPixels()):
+		        strip.setPixelColor(i, Color(int(row[i*3]), int(row[i*3+1]), int(row[i*3+2])))
+		        print i, row
+		        print "foo", i, row[0]
+		    strip.show()
+		    time.sleep(wait_ms/1000.0)
+
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -85,15 +99,5 @@ if __name__ == '__main__':
 	print 'Press Ctrl-C to quit.'
 	while True:
 		# Color wipe animations.
-		colorWipe(strip, Color(255, 0, 0))  # Red wipe
-		colorWipe(strip, Color(0, 255, 0))  # Blue wipe
-		colorWipe(strip, Color(0, 0, 255))  # Green wipe
-		# Theater chase animations.
-		theaterChase(strip, Color(127, 127, 127))  # White theater chase
-		theaterChase(strip, Color(127,   0,   0))  # Red theater chase
-		theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
-		# Rainbow animations.
-		rainbow(strip)
-		rainbowCycle(strip)
-		theaterChaseRainbow(strip)
+		csvdisp(strip)
 
