@@ -25,6 +25,7 @@ LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 
+position = 1
 
 EV_MSC = 0x04
 MSC_PULSELED = 0x01
@@ -215,8 +216,8 @@ class PowerMateEventHandler(EventHandler):
         self.__rotated = True
         return self.push_rotate(event.value)
       else:
-        self.position=self.position+event.value
-        print('position {}!'.self.position)
+        position=position+event.value
+        print('position {}!'.position)
         return self.rotate(event.value)
 
   def short_press(self):
