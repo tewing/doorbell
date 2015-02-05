@@ -215,6 +215,8 @@ class PowerMateEventHandler(EventHandler):
         self.__rotated = True
         return self.push_rotate(event.value)
       else:
+        self.position=self.position+event.value
+        print('position {}!'.self.position)
         return self.rotate(event.value)
 
   def short_press(self):
@@ -260,11 +262,14 @@ class ExamplePowerMate(PowerMateBase):
     super(ExamplePowerMate, self).__init__(path)
     self._pulsing = False
     self._brightness = MAX_BRIGHTNESS
+    self._colorseed = 0
+    self._colorstep = 0
 
   def short_press(self):
     print('Short press!')
     self._pulsing = not self._pulsing
     print(self._pulsing)
+    
     if self._pulsing:
       colorWipe(strip, Color(255, 0, 0))  # Red wipe
       return LedEvent.pulse()
