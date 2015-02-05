@@ -265,13 +265,14 @@ class ExamplePowerMate(PowerMateBase):
     self._pulsing = not self._pulsing
     print(self._pulsing)
     if self._pulsing:
+      colorWipe(strip, Color(255, 0, 0))  # Red wipe
       return LedEvent.pulse()
     else:
+      colorWipe(strip, Color(0, 255, 0))  # Red wipe
       return LedEvent(brightness=self._brightness)
 
   def long_press(self):
     print('Long press!')
-    colorWipe(strip, Color(255, 0, 0))  # Red wipe
 
   def rotate(self, rotation):
     print('Rotate {}!'.format(rotation))
@@ -290,12 +291,12 @@ class ExampleBadHandler(PowerMateEventHandler):
 
 
 if __name__ == "__main__":
+  # Create NeoPixel object with appropriate configuration.
+  strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
+  # Intialize the library (must be called once before other functions).
+  strip.begin()
   pm = ExamplePowerMate(glob.glob('/dev/input/by-id/*PowerMate*')[0])
   pm.add_listener(ExampleBadHandler())
   pm.run()
 
 
-	# Create NeoPixel object with appropriate configuration.
-	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
-	# Intialize the library (must be called once before other functions).
-	strip.begin()

@@ -18,6 +18,7 @@ if [ "$_IP" ]; then
 fi
 
 cd /var/tmp/doorbell
+git branch powermate_knob
 git pull
 ./start.sh &
 

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python strandtest.py
+python powermate_strandtest.py
