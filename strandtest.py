@@ -64,7 +64,7 @@ def terryrain(strip, wait_ms=50, iterations=1):
                 for i in range(strip.numPixels()):
                         strip.setPixelColor(i, wheel((j) & 255))
                 strip.show()
-                time.sleep(wait_ms/1000.0)
+                time.sleep(wait_ms/10)
 
 
 
